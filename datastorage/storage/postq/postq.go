@@ -1,6 +1,6 @@
 package postq
 
-import "github.com/DevJBlack/golang-architecture"
+import "C:\Users\Zendragon\DevMountain\DevMountain-school\udemy-classes\udemy-go-course\exploringGo\golang-architecture\datastorage\storage\postq"
 
 type Db map[int]architecture.Person
 

@@ -2,9 +2,9 @@ package main
 
 import (
 	"fmt"
-	"github.com/DevJBlack/golang-architecture"
-	"github.com/DevJBlack/golang-architecture/datastorage/mongo"
-	"github.com/DevJBlack/golang-architecture/datastorage/postq"
+	"C:\Users\Zendragon\DevMountain\DevMountain-school\udemy-classes\udemy-go-course\exploringGo\golang-architecture\datastorage"
+	"C:\Users\Zendragon\DevMountain\DevMountain-school\udemy-classes\udemy-go-course\exploringGo\golang-architecture\datastorage\storage\mongo"
+	"C:\Users\Zendragon\DevMountain\DevMountain-school\udemy-classes\udemy-go-course\exploringGo\golang-architecture\datastorage\storage\postq"
 
 )
 
