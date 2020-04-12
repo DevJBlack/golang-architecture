@@ -13,7 +13,7 @@ func (m mongo) save(n int, p person) {
 	m[n] = p
 }
 
-func (m mongo) retrive(n int) person {
+func (m mongo) retrieve(n int) person {
 	return m[n]
 }
 
@@ -21,13 +21,25 @@ func (pg postg) save(n int, p person) {
 	pg[n] = p
 }
 
-func (pg postg) retrive(n int) person {
+func (pg postg) retrieve(n int) person {
 	return pg[n]
 }
 
 type accessor interface {
 	save(n int, p person)
-	retrive(n int) person
+	retrieve(n int) person
+}
+
+type personService struct {
+	a accessor
+}
+
+func (ps personService) get(n int) (person, error) {
+	p := ps.a.retrieve(n)
+	if p.first == "" {
+		return person{}, fmt.Errorf("No person with n of %d", n)
+	}
+	return p, nil
 }
 
 func put(a accessor, n int, p person) {
@@ -35,7 +47,7 @@ func put(a accessor, n int, p person) {
 }
 
 func get(a accessor, n int) person {
-	return a.retrive(n)
+	return a.retrieve(n)
 }
 
 func main() {
@@ -50,10 +62,17 @@ func main() {
 		first: "James",
 	}
 
+	ps := personService{
+		a: dbm,
+	}
+
 	put(dbm, 1, p1)
 	put(dbm, 2, p2)
 	fmt.Println("this is saving to Mongo DB", get(dbm, 1))
 	fmt.Println("This is retriving from Mongo DB", get(dbm, 2))
+
+	fmt.Println(ps.get(1))
+	fmt.Println(ps.get(3))
 
 	put(dbp, 1, p1)
 	put(dbp, 2, p2)
