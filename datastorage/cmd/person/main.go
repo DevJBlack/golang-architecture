@@ -2,10 +2,9 @@ package main
 
 import (
 	"fmt"
-	"C:\Users\Zendragon\DevMountain\DevMountain-school\udemy-classes\udemy-go-course\exploringGo\golang-architecture\datastorage"
-	"C:\Users\Zendragon\DevMountain\DevMountain-school\udemy-classes\udemy-go-course\exploringGo\golang-architecture\datastorage\storage\mongo"
-	"C:\Users\Zendragon\DevMountain\DevMountain-school\udemy-classes\udemy-go-course\exploringGo\golang-architecture\datastorage\storage\postq"
-
+	"https://github.com/DevJBlack/golang-architecture/tree/master/datastorage"
+	"https://github.com/DevJBlack/golang-architecture/tree/master/datastorage/storage/mongo"
+	"https://github.com/DevJBlack/golang-architecture/tree/master/datastorage/storage/postq"
 )
 
 func main() {
@@ -33,5 +32,5 @@ func main() {
 	architecture.Put(dbp, 1, p1)
 	architecture.Put(dbp, 2, p2)
 	fmt.Println("This is saving to PostQ DB", architecture.Get(dbp, 1))
-	fmt.Println("This is retriving from PostQ BD",architecture.Gget(dbp, 2))
+	fmt.Println("This is retriving from PostQ BD", architecture.Gget(dbp, 2))
 }
