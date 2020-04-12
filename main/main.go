@@ -28,6 +28,10 @@ type human interface {
 	speak()
 }
 
+func foo(h human) {
+	h.speak()
+}
+
 func main() {
 	// Abstract type is p1
 	p1 := person{
@@ -48,4 +52,9 @@ func main() {
 	y = sal
 	x.speak()
 	y.speak()
+	fmt.Println("--------------")
+	foo(x)
+	foo(y)
+	foo(p1)
+	foo(sal)
 }
