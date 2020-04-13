@@ -32,5 +32,5 @@ func main() {
 	architecture.Put(dbp, 1, p1)
 	architecture.Put(dbp, 2, p2)
 	fmt.Println("This is saving to PostQ DB", architecture.Get(dbp, 1))
-	fmt.Println("This is retriving from PostQ BD", architecture.Gget(dbp, 2))
+	fmt.Println("This is retriving from PostQ BD", architecture.Get(dbp, 2))
 }
