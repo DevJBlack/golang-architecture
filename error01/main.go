@@ -3,21 +3,19 @@ package main
 import (
 	"errors"
 	"fmt"
-	"time"
 )
 
-type errFileNotFound struct {
+type errFile struct {
 	filename string
-	when     time.Time
+	base     error
 }
 
-func (e errFileNotFound) Error() string {
-	return fmt.Sprintf("File %s was not found at %v", e.filename, e.when)
+func (e errFile) Error() string {
+	return fmt.Sprintf("File %s: %v", e.filename, e.base)
 }
 
-func (e errFileNotFound) Is(other error) bool {
-	_, ok := other.(errFileNotFound)
-	return ok
+func (e errFile) Unwrap() error {
+	return e.base
 }
 
 var errNotExist = fmt.Errorf("File does not exist")
@@ -25,6 +23,13 @@ var errUserNotExist = errors.New("User does not exist")
 
 func openFile(filename string) (string, error) {
 	return "", errNotExist
+}
+
+func openFile2(filename string) (string, error) {
+	return "", errFile{
+		filename: filename,
+		base:     errNotExist,
+	}
 }
 
 func main() {
@@ -35,5 +40,13 @@ func main() {
 			fmt.Println("This is an errNotExist")
 		}
 		panic(wrappedErr)
+	}
+
+	_, err = openFile2("test.txt")
+	if err != nil {
+		if errors.Is(err, errNotExist) {
+			fmt.Println("This is an errNotExist")
+		}
+		fmt.Println(err)
 	}
 }
