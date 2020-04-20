@@ -1,6 +1,7 @@
 package main
 
 import (
+	"errors"
 	"fmt"
 	"io"
 	"log"
@@ -11,7 +12,9 @@ func main() {
 	src := "filePoem-01.txt"
 	dst := "second-file.txt"
 	err := copyFile(dst, src)
-	if err != nil {
+	if errors.Is(err, os.ErrNotExist) {
+		fmt.Println("You need ot provide the filePoem-01.txt of a valid file in your directory next to the executable")
+	} else if err != nil {
 		log.Panicln("in main, calling copyFile returned an error:", err)
 	}
 }
